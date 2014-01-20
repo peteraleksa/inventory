@@ -1,0 +1,16 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+   Peter Aleksa -- Developer -- github.com/peteraleksa
+
+# THANKS
+
+    <name>
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3
+    jQuery, Modernizr,
+    MEAN.io
