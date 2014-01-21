@@ -1,0 +1,33 @@
+<section>
+<div data-ng-controller="InventoryController" 
+		 data-ng-init="find()">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <header class="span8 offset2" 
+                    data-ng-show="inventory || inventory.length > 0">
+                    <h1>Locations:</h1>
+            </header>
+        </div>
+        <div class="row-fluid">
+            <div class="span5 offset2 pull-left" 
+                 data-ng-show="inventory 
+                    || inventory.length > 0">
+                    Search: 
+                    <input ng-model="query" 
+                           value="">
+                    </input>
+            </div>
+
+            <div class="well span8 offset2">
+
+				<ul class="inventory unstyled">
+				    <li data-ng-repeat=
+				            "storeinventory in inventory | filter:{product:query} | orderBy:listSort"
+				        id="{{inventory._id}}">
+				        <h2><a href="/inventory/{{storeinventory._id}}">{{storeinventory.store}}</a></h2>
+				        <span>Last Updated: {{storeinventory.updated | date:'medium'}}</span>
+				    </li>
+				</ul>
+			</div>
+</div>
+</section>

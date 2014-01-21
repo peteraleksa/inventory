@@ -6,6 +6,7 @@ angular.module('inventoryApp.inventory').controller('InventoryController', ['$sc
     $scope.create = function() {
         var inventory = new Inventory(
             {
+                store: $scope.store,
                 updated: Date.now,
                 items: []
             }

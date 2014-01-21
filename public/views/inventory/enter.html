@@ -1,20 +1,14 @@
 <section>
 <div data-ng-controller="InventoryController">    
-        <div>
-                <button type="button"
-        		class="btn btn-primary"
-        		ng-toggle="addSelect">
-        		Add Product
-        	</button>
-        </div>
         <div class="well span8 offset2">
-        	<form>
-        	       Product:<input/><br/>
-        	       Initial Quantity:<input/><br/> 
-                       Supplier:<input/><br/>
-                       SKU:<input/><br/>
-                       Price:<input/><br/>
-                       Last Ordered:<input/><br/>
+        	<form action="/addItem" method="post">
+        	       Product:<input type="text" name="product"/><br/>
+        	       Initial Quantity:<input type="text" name="qty"/><br/> 
+                       Supplier:<input type="text" name="supplier"/><br/>
+                       SKU:<input type="text" name="sku"/><br/>
+                       Price:<input type="text" name="price"/><br/>
+                       Last Ordered:<input type="text" name="lastOrdered"/><br/>
+                       <input type="submit" class="btn btn-success" />
         	</form>
         </div>
 </div>

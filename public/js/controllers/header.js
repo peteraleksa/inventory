@@ -3,11 +3,15 @@ angular.module('inventoryApp.system').controller('HeaderController', ['$scope', 
 
     $scope.menu = [{
         "title": "Inventory",
-        "link": "inventory/list"
+        "link": "inventory/locations"
     }, 
     {
         "title": "Add/Delete Item",
         "link": "inventory/enter"
+    },
+    {
+        "title": "Add Store",
+        "link": "inventory/store"
     },
     {
     	"title": "About",

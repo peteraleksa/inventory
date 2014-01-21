@@ -9,6 +9,9 @@ var mongoose = require('mongoose'),
  * Inventory Schema
  */
  var InventorySchema = new Schema({
+ 	store: {
+ 		type: String
+ 	},
 	updated: {
 	   type: Date,
 	   default: Date.now
@@ -40,15 +43,19 @@ var mongoose = require('mongoose'),
 
 /**
  * Statics
-
+*/
 InventorySchema.statics = {
     load: function(id, cb) {
         this.findOne({
             _id: id
         }).exec(cb);
+    },
+    loadByStoreName: function(name, cb) {
+    	this.findOne({
+    		store: name
+    	}).exec(cb);
     }
 };
- */
 
 mongoose.model('Inventory', InventorySchema);
 	

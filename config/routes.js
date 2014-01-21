@@ -1,9 +1,10 @@
 module.exports = function(app, passport, auth) {
     //User Routes
     //var users = require('../app/controllers/users');
-    var inventory = require('../app/controllers/inventory');
+    var inventories = require('../app/controllers/inventory');
 
-
+    app.post('/addItem', inventories.addItem);
+    app.post('/addStore', inventories.create);
     //app.get('/signin', users.signin);
     //app.get('/signup', users.signup);
     //app.get('/signout', users.signout);
@@ -65,12 +66,12 @@ module.exports = function(app, passport, auth) {
 */
     //Symphony Routes
     
-    //app.get('/inventory', inventory.all);
+    app.get('/inventory', inventories.all);
     // authenticated users only can create
     //app.post('/inventory', auth.requiresLogin, inventory.create);
     // update to include composition creation
     //app.post('/inventory', inventory.create);
-    //app.get('/inventory/:inventoryId', inventory.show);
+    app.get('/inventory/:inventoryId', inventories.show);
     //app.post('/inventory/favorite/:inventoryId', inventory.fav);
     //app.put('/inventory/:inventoryId', inventory.update);
     //app.put('/fav/:inventoryId/:userId', inventory.fav);
@@ -78,7 +79,7 @@ module.exports = function(app, passport, auth) {
     //app.put('users/:userId', users.update);
 
     //Finish with setting up the inventoryId param
-   // app.param('inventoryId', inventory.inventory);
+    app.param('inventoryId', inventories.inventory);
 
     //Home route
     var index = require('../app/controllers/index');
