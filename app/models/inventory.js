@@ -40,7 +40,7 @@ var mongoose = require('mongoose'),
 
 /**
  * Statics
- */
+
 InventorySchema.statics = {
     load: function(id, cb) {
         this.findOne({
@@ -48,7 +48,7 @@ InventorySchema.statics = {
         }).exec(cb);
     }
 };
-
+ */
 
 mongoose.model('Inventory', InventorySchema);
 	

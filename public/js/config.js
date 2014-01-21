@@ -48,9 +48,12 @@ window.app.config(['$routeProvider',
             templateUrl: 'views/inventory/list.html',
             controller: 'InventoryController'
           }).
-          when('inventory/order', {
+          when('/inventory/order', {
           	templateUrl: 'views/inventory/order.html',
           	controller: 'InventoryController'
+          }).
+          when('/about', {
+            templateUrl: 'views/about.html'
           }).
           otherwise({
             redirectTo: '/welcome'

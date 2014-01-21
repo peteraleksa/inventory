@@ -1,4 +1,4 @@
-angular.module('symphonyApp.system').factory("Global", [function() {
+angular.module('inventoryApp.system').factory("Global", [function() {
     var _this = this;
     _this._data = {
         user: window.user,

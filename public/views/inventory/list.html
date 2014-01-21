@@ -1,54 +1,56 @@
-<section data-ng-controller="InventoryController" 
+<section>
+<div data-ng-controller="InventoryController" 
 		 data-ng-init="find()">
-<div class="container-fluid">
-    <div class="row-fluid">
-        <header class="span8 offset2" 
-                data-ng-show="inventory || inventory.length > 0">
-                <h1>Inventory:</h1>
-        </header>
-    </div>
-    <div class="row-fluid">
-        <div class="span5 offset2 pull-left" 
-             data-ng-show="inventory 
-                || inventory.length > 0">
-                Search: 
-                <input ng-model="query" 
-                       value="">
-                </input>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <header class="span8 offset2" 
+                    data-ng-show="inventory || inventory.length > 0">
+                    <h1>Inventory:</h1>
+            </header>
         </div>
-        <div class="btn-group span4 offset1 pull-right">
-            <button type="button" 
-                    class="btn btn-primary" 
-                    ng-model="listSort"
-                    btn-radio="'-product'">
-                    Product
-            </button>
-            <button type="button" 
-                    class="btn btn-primary" 
-                    ng-model="listSort"
-                    btn-radio="'-qty'">
-                    Quantity
-            </button>
-            <button type="button" 
-                    class="btn btn-primary" 
-                    ng-model="listSort" 
-                    btn-radio="'-lastChecked'">
-                    Last Checked
-            </button>
-        </div>
-        <div class="well span8 offset2">
-            <ul class="inventory unstyled">
-                <li data-ng-repeat=
-                        "inventory in inventory | filter:{product:query} | orderBy:listSort"
-                    id="{{inventory._id}}">
-                    <span>{{inventory.created | date:'medium'}}</span> /
-                    <!--{{inventory.user.name}}-->
-                    <h2>{{inventory.product}}</h2>
-                    <div>{{inventory.qty}}</div>
-                    <div>{{inventory.lastChecked}}</div>
-                </li>
-            </ul>
-            <h1 data-ng-hide="!inventory || inventory.length">No inventory yet. <br> Why don't you add an item?</h1>
+        <div class="row-fluid">
+            <div class="span5 offset2 pull-left" 
+                 data-ng-show="inventory 
+                    || inventory.length > 0">
+                    Search: 
+                    <input ng-model="query" 
+                           value="">
+                    </input>
+            </div>
+            <div class="btn-group span4 offset1 pull-right">
+                <button type="button" 
+                        class="btn btn-primary" 
+                        ng-model="listSort"
+                        btn-radio="'-product'">
+                        Product
+                </button>
+                <button type="button" 
+                        class="btn btn-primary" 
+                        ng-model="listSort"
+                        btn-radio="'-qty'">
+                        Quantity
+                </button>
+                <button type="button" 
+                        class="btn btn-primary" 
+                        ng-model="listSort" 
+                        btn-radio="'-lastChecked'">
+                        Last Checked
+                </button>
+            </div>
+            <div class="well span8 offset2">
+                <ul class="inventory unstyled">
+                    <li data-ng-repeat=
+                            "inventory in inventory | filter:{product:query} | orderBy:listSort"
+                        id="{{inventory._id}}">
+                        <span>{{inventory.created | date:'medium'}}</span> /
+                        <!--{{inventory.user.name}}-->
+                        <h2>{{inventory.product}}</h2>
+                        <div>{{inventory.qty}}</div>
+                        <div>{{inventory.lastChecked}}</div>
+                    </li>
+                </ul>
+                <h1 data-ng-show="!inventory || inventory.length < 1">No inventory yet. <br> Why don't you add an item?</h1>
+            </div>
         </div>
     </div>
 </div>

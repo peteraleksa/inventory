@@ -23,9 +23,9 @@ exports.user = {
 /**
  * Article authorizations routing middleware
  */
-exports.symphony = {
+exports.inventory = {
     hasAuthorization: function(req, res, next) {
-        if (req.symphony.user.id != req.user.id) {
+        if (req.inventory.user.id != req.user.id) {
             return res.send(401, 'User is not authorized');
         }
         next();

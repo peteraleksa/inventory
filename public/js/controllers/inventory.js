@@ -40,9 +40,6 @@ angular.module('inventoryApp.inventory').controller('InventoryController', ['$sc
         });
     };
 
-    $scope.updateItem = function() {
-    };
-
     $scope.find = function() {
         Inventory.query(function(inventory) {
             $scope.inventory = inventory;
@@ -54,7 +51,6 @@ angular.module('inventoryApp.inventory').controller('InventoryController', ['$sc
             inventoryId: $routeParams.inventoryId
         }, function(inventory) {
             $scope.inventory = inventory;
-            console.log($scope.inventory.favorites);
         });
     };
 

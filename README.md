@@ -1,13 +1,6 @@
-# Marathon Symphony
+# Inventory System
 
-## Git Repository
-You can track my progress through writing this code in the following github repository https://github.com/peteraleksa/marathon-symphony-project
-
-It doesn't however track the filepath change I made in the MIDI.js library to account for my file structure, so I don't know if cloning it would work to actually run the app.
-  
-## Prerequisites
-
-You will need MIDI.js installed on the front end and the jsmidgen node module (npm install jsmidgen) on the back end.
+This is a simple inventory system originally written for a pizza place.
 
 ## Tests
 

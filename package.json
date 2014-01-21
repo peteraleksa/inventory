@@ -18,7 +18,7 @@
         "postinstall": "bower install"
     },
     "dependencies": {
-        "express": "3.4.4",
+        "express": "latest",
         "jade": "latest",
         "mongoose": "latest",
         "connect-mongo": "latest",
@@ -33,7 +33,7 @@
         "underscore": "latest",
         "view-helpers": "latest",
         "mean-logger": "latest",
-        "forever": "0.9.2",
+        "forever": "latest",
         "bower": "latest",
         "grunt": "latest",
         "grunt-cli": "latest",

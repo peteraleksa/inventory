@@ -1,50 +1,22 @@
-<!-- Main component for a primary marketing message or call to action 
-<section data-ng-controller="SymphonyController"
+<!--Main component for a primary marketing message or call to action -->
+<section data-ng-controller="InventoryController"
          data-ng-init="find()">
+    
     <div class="row-fluid">
-      <div ng-hide="symphonies.length < 1">
-        <h2 class="text-centered">Top Symphonies:</h2>
-          <div class="btn-group span10 float-left">
-            <button type="button" 
-                    class="btn btn-primary" 
-                    ng-model="sideSort"
-                    btn-radio="'-favorites.num'">
-                    Favorite
-            </button>
-            <button type="button" 
-                    class="btn btn-primary" 
-                    ng-model="sideSort"
-                    btn-radio="'-created'">
-                    Newest
-            </button>
-          </div>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="well sidebar-nav span3 float-left">
-        <ul class="symphonies unstyled">
-          <li data-ng-repeat="symphony in symphonies | orderBy:sideSort | limitTo:10">
-            <span>{{symphony.created | date:'medium'}}</span>
-            <h3><a data-ng-href="#!/symphonies/{{symphony._id}}">{{symphony.title}}</a></h2>
-            <h4>by: {{symphony.composer}}</h4>
-
-          </li>
-        </ul>
-      </div>
 
       <div class="span9">
         <div class="hero-unit">
           <div id="mainTitle">
-            <h1 id="originalTitle">Marathon MIDI</h1>
+            <h1 id="originalTitle">Norbert's Inventory</h1>
           </div>
           <div id="callOut">
-            <h2 class="text-center"><span class="highlight">Let's make some music!</span></h2><br/>
+            <h2 class="text-center"><span class="highlight">Woohoo Inventory!</span></h2><br/>
             <p class="text-center">
-            <a href="#!/symphonies/compose" 
+            <a href="#!/inventory/list" 
                role="button" 
                id="getStartedButton" 
                class="btn btn-large btn-info">
-               Compose A Symphony &raquo;
+               Inventory &raquo;
             </a>
             </p>
           </div>
@@ -53,8 +25,6 @@
     </div>
 
 </section>
-
--->
 
 
 

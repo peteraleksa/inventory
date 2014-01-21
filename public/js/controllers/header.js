@@ -3,11 +3,15 @@ angular.module('inventoryApp.system').controller('HeaderController', ['$scope', 
 
     $scope.menu = [{
         "title": "Inventory",
-        "link": "inventory/list",
+        "link": "inventory/list"
     }, 
     {
+        "title": "Add/Delete Item",
+        "link": "inventory/enter"
+    },
+    {
     	"title": "About",
-    	"link": "about",
+    	"link": "about"
     }];
 
     $scope.authmenu = [];
