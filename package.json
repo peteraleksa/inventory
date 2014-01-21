@@ -33,7 +33,7 @@
         "underscore": "latest",
         "view-helpers": "latest",
         "mean-logger": "latest",
-        "forever": "latest",
+        "forever": "0.9.2",
         "bower": "latest",
         "grunt": "latest",
         "grunt-cli": "latest",
