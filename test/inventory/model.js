@@ -27,17 +27,28 @@ describe('<Unit Test>', function() {
 
             user.save(function(err) {
                 Inventory = new Inventory({
-                    title: 'Inventory Title',
-                    composer: 'Composer',
-                    year: '2013',
-                    runnerRange: ['Pro Men', 'Pro Women'],
-                    timingLocations: {
-                        locations: ['Start', 'Mile 1', 'Mile 2']
-                    },
-                    melody: {
-                        melodyType: 'Harmonic'
-                    },
-                    user: user
+                    store: 'Norberts Test Store',
+                    updated: Date.now,
+                    items: [
+                    	{
+                    		product: 'Pepperoni',
+                    		qty: '7',
+                    		lastChecked: Date.now,
+							   supplier: 'Meats and stuff',
+	   						SKU: 5768575,
+	   						price: 5.00,
+	   						lastOrdered: Date.now
+                    	},
+                    	{
+	                    	product: 'Fresh Mozarella',
+                    		qty: '3',
+                    		lastChecked: Date.now,
+							   supplier: 'The Cheese Wiz',
+	   						SKU: 576777,
+	   						price: 3.00,
+	   						lastOrdered: Date.now
+                    	}
+                    ]
                 });
 
                 done();
@@ -48,24 +59,6 @@ describe('<Unit Test>', function() {
             it('should be able to save without problems', function(done) {
                 return Inventory.save(function(err) {
                     should.not.exist(err);
-                    done();
-                });
-            });
-
-            it('should be able to show an error when trying to save without title', function(done) {
-                Inventory.title = '';
-
-                return Inventory.save(function(err) {
-                    should.exist(err);
-                    done();
-                });
-            });
-
-            it('should be able to show an error when trying to save without composer', function(done) {
-                Inventory.composer = '';
-
-                return Inventory.save(function(err) {
-                    should.exist(err);
                     done();
                 });
             });
