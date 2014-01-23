@@ -1,0 +1,100 @@
+<section>
+<div data-ng-controller="InventoryController" 
+		 data-ng-init="getReorders()">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <header class="span8 offset2" 
+                    data-ng-show="inventory || inventory.length > 0">
+                    <h1>Inventory:</h1>
+            </header>
+        </div>
+        <!--
+        <div class="row-fluid">
+            <div class="span5 offset2 pull-left" 
+                 data-ng-show="inventory 
+                    || inventory.length > 0">
+                    Search: 
+                    <input ng-model="query" 
+                           value="">
+                    </input>
+            </div>
+            <div class="btn-group span4 offset1 pull-right"
+                 ng-show="!updating">
+                <button type="button" 
+                        class="btn btn-primary" 
+                        ng-model="listSort"
+                        btn-radio="'product'">
+                        Product
+                </button>
+                <button type="button" 
+                        class="btn btn-primary" 
+                        ng-model="listSort"
+                        btn-radio="'qty'">
+                        Quantity
+                </button>
+            
+                <button type="button" 
+                        class="btn btn-primary" 
+                        ng-model="listSort" 
+                        btn-radio="'-lastOrdered'">
+                        Last Checked
+                </button>
+            
+            </div>
+            -->
+            <div class="well span8 offset2">
+                <form name="orderForm">
+                    <div>
+                        <ul class="inventory unstyled">
+                            <li class="border-row" data-ng-repeat="item in reorders | filter:{product:query} | orderBy:listSort">
+                                <span class="pad-left">{{item.product}}</span>
+                                <input 
+                                    class="input-mini pull-right pad-right text-right"
+                                    ng-show="updating"
+                                    type="text" 
+                                    name="qty" 
+                                    ng-model="item.qty" />
+                                <span
+                                    class="pull-right pad-right"
+                                    ng-show="!updating" >
+                                    {{item.qty}}    
+                                </span>
+                                {{inventory.lastOrdered}}
+                            </li>
+                        </ul>
+                    </div>
+                    <!--
+                    <div>
+                        <div ng-show="updating">
+                            <button 
+                                ng-show="updating"
+                                type="button" 
+                                class="btn btn-primary"
+                                ng-click="update(inventoryForm)">
+                                Submit
+                            </button>
+                            Submitted by: <input type="text" name="submitterName" required />
+                            <span ng-show="needName">You need to enter a name.</span>
+                        </div>
+                        <div ng-show="!updating">
+                            <button 
+                                    type="button" 
+                                    class="btn btn-success"
+                                    ng-click="enter()">
+                                    Update
+                            </button>
+                        </div>
+                    </div>
+                    <div 
+                        ng-show="updatecomplete">
+                        Inventory count entered, thanks comrade!
+                    </div>
+                -->
+                </form>
+
+                <h1 data-ng-show="!reorders|| reorders.length < 1">Nothing to Order</h1>
+            </div>
+        </div>
+    </div>
+</div>
+</section>

@@ -2,6 +2,7 @@ module.exports = function(app, passport, auth) {
     //User Routes
     var users = require('../app/controllers/users');
     var inventories = require('../app/controllers/inventory');
+    var order = require('../app/controllers/order');
 
     app.get('/signin', users.signin);
     app.get('/signup', users.signup);
@@ -70,6 +71,7 @@ module.exports = function(app, passport, auth) {
     app.post('/addStore', auth.requiresLogin, inventories.create);
     app.put('/inventory/stores/:storeId', inventories.update);
     app.get('/inventory/stores/:storeId', inventories.show);
+    app.get('/inventory/order', order.orders);
     //app.put('/inventory/:storeId', inventory.update);
     //app.del('/inventory/:storeId', auth.requiresLogin, auth.inventory.hasAuthorization, inventory.destroy);*/
     //app.put('users/:userId', users.update);

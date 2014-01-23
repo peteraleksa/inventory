@@ -1,8 +1,4 @@
 /**
-* Attempted to make some tests, but they are incomplete
-*/
-
-/**
 * Module dependencies.
 */
 var should = require('should'),

@@ -10,14 +10,20 @@ angular.module('inventoryApp.system').controller('HeaderController', ['$scope', 
     	"link": "about"
     }];
 
-    $scope.authmenu = [{
-        "title": "Add/Delete Item",
-        "link": "inventory/enter"
-    },
-    {
-        "title": "Add Store",
-        "link": "inventory/store"
-    }];
+    $scope.authmenu = [
+        {
+            "title": "Orders",
+            "link": "inventory/order"
+        },
+        {
+            "title": "Add/Delete Item",
+            "link": "inventory/enter"
+        },
+        {
+            "title": "Add Store",
+            "link": "inventory/store"
+        }
+    ];
     
     $scope.isCollapsed = false;
 }]);

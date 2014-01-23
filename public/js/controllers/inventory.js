@@ -73,7 +73,6 @@ angular.module('inventoryApp.inventory').controller('InventoryController', ['$sc
         });
     };
 
-
     $scope.loadInventory = function() {
         Inventory.get({
             storeId: $routeParams.storeId
@@ -82,6 +81,15 @@ angular.module('inventoryApp.inventory').controller('InventoryController', ['$sc
             console.log(inventory);
         });
 
+    };
+
+    $scope.getReorders = function() {
+        Inventory.get({
+            storeId: $routeParams.storeId
+        }, function(inventory) {
+            $scope.inventory = inventory;
+            console.log(inventory);
+        });
     };
 
 }]);
