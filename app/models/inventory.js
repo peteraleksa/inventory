@@ -38,6 +38,9 @@ var mongoose = require('mongoose'),
 	   reorderLimit: {
 	   	type: Number
 	   },
+	   needsReorder: {
+	   	type: Boolean
+	   },
 	   lastOrdered: {
 	      type: Date
   	   }	

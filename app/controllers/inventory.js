@@ -35,24 +35,30 @@ exports.create = function(req, res, next) {
     
 };
 
-var checkReorder = function(checkinventory) {
-	console.log(checkinventory);
-	for(var i=0; i < checkinventory.items.length; i++) {
-		if(!(checkinventory.items[i].qty > 
-			checkinventory.items[i].reorderLimit)) {
-				console.log("Reorder " + checkinventory.items[i].product);
-		}
-		else {
-			console.log("No need to reorder " + checkinventory.items[i].product);
-		}
+var checkReorder = function(item) {
+	console.log(item);
+	if(!(item.qty > 
+		item.reorderLimit)) {
+			console.log("Reorder " + item.product);
+			item.reorder = new Boolean(true);
+	}
+	else {
+		console.log("No need to reorder " + item.product);
+		item.reorder = new Boolean(false);
 	}
 };
 
 exports.update = function(req, res) {
      var inventory = req.inventory;
      inventory = _.extend(inventory, req.body);
+
+     // check reorder status of each item
+     for(var i=0; i < inventory.items.length; i++) {
+     	checkReorder(inventory.items[i]);
+     }	
+
+     // save inventory
      inventory.save(function(err) {
-     	checkReorder(inventory);
 		res.jsonp(inventory);
      });
 };
@@ -75,12 +81,27 @@ exports.all = function(req, res) {
 
 exports.addItem = function(req, res) {
 
-	console.log(req.body);
 	var selectedStore = req.body.selectedStore;
-	console.log(selectedStore);
 
 	var inventory;
 	var stores = [];
+
+	var addToInventory = function(inventory) { 
+				console.log(inventory);
+				inventory.updated = new Date();
+				inventory.items.push(
+					{
+						'product': req.body.product, 
+						'qty': req.body.qty, 
+						'supplier': req.body.supplier, 
+						'sku': req.body.sku, 
+						'price': req.body.price, 
+						'reorderLimit': req.body.reorderLimit,
+						'needsReorder': false, 
+						'lastOrdered': req.body.lastOrdered 
+					}
+				);
+	};
 
 	// if inserting item into all stores
 	if(selectedStore == "all") {
@@ -92,61 +113,29 @@ exports.addItem = function(req, res) {
 	        } else {
 	        	//console.log(inventory);
 	            for(var i=0; i < inventory.length; i++) {
-	            	var currentinventory = inventory[i];
-	            	console.log(currentinventory);
-					currentinventory.updated = new Date();
-					currentinventory.items.push(
-						{
-							'product': req.body.product, 
-							'qty': req.body.qty, 
-							'supplier': req.body.supplier, 
-							'sku': req.body.sku, 
-							'price': req.body.price, 
-							'reorderLimit': req.body.reorderLimit, 
-							'lastOrdered': req.body.lastOrdered 
-						}
-					);
-
-					currentinventory.save(function(err) {
-
-					});
+	            	addToInventory(inventory[i]);
+	            	inventory[i].save(function(err) {
+	            	});
 	            }
+	            
 	            res.json(inventory);
 	        }
-	        //console.log("Stores: " + stores);
 	    });
 		
 	// else if a single store selected
 	} else {
-
-		stores.push(Inventory.loadByStoreName(selectedStore, function(err, inventory) {
+		Inventory.loadByStoreName(selectedStore, function(err, inventory) {
 			if (err) {
 	            res.render('error', {
 	                status: 500
 	            });
 	        } else {
-	        	console.log(inventory);
-	        	var currentinventory = inventory;
-				currentinventory.updated = new Date();
-				currentinventory.items.push(
-					{
-						'product': req.body.product, 
-						'qty': req.body.qty, 
-						'supplier': req.body.supplier, 
-						'sku': req.body.sku, 
-						'price': req.body.price, 
-						'reorderLimit': req.body.reorderLimit, 
-						'lastOrdered': req.body.lastOrdered 
-					}
-				);
-
-				currentinventory.save(function(err) {
-					//res.json(currentinventory);
+	        	addToInventory(inventory);
+				inventory.save(function(err) {
+					res.jsonp(inventory);
 				});
-
-				res.jsonp(inventory);
 	        }
-		}));
+		});
 	}
 };
 
