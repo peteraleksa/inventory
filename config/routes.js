@@ -1,16 +1,14 @@
 module.exports = function(app, passport, auth) {
     //User Routes
-    //var users = require('../app/controllers/users');
+    var users = require('../app/controllers/users');
     var inventories = require('../app/controllers/inventory');
 
-    app.post('/addItem', inventories.addItem);
-    app.post('/addStore', inventories.create);
-    //app.get('/signin', users.signin);
-    //app.get('/signup', users.signup);
-    //app.get('/signout', users.signout);
+    app.get('/signin', users.signin);
+    app.get('/signup', users.signup);
+    app.get('/signout', users.signout);
 
     //Setting up the users api
-    /*app.post('/users', users.create);
+    app.post('/users', users.create);
 
     app.post('/users/session', passport.authenticate('local', {
         failureRedirect: '/signin',
@@ -63,18 +61,16 @@ module.exports = function(app, passport, auth) {
 
     //Finish with setting up the userId param
     app.param('userId', users.user);
-*/
-    //Symphony Routes
+
+    //Inventory Routes
     
     app.get('/inventory', inventories.all);
     // authenticated users only can create
     //app.post('/inventory', auth.requiresLogin, inventory.create);
-    // update to include composition creation
-    //app.post('/inventory', inventory.create);
+    app.post('/addItem', inventories.addItem);
+    app.post('/addStore', inventories.create);
     app.get('/inventory/:inventoryId', inventories.show);
-    //app.post('/inventory/favorite/:inventoryId', inventory.fav);
     //app.put('/inventory/:inventoryId', inventory.update);
-    //app.put('/fav/:inventoryId/:userId', inventory.fav);
     //app.del('/inventory/:inventoryId', auth.requiresLogin, auth.inventory.hasAuthorization, inventory.destroy);*/
     //app.put('users/:userId', users.update);
 

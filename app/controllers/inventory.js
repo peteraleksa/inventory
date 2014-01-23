@@ -75,7 +75,7 @@ exports.addItem = function(req, res) {
 		console.log(price);
 		console.log(lastOrdered);
 
-		inventory.updated = Date.now;
+		inventory.updated = new Date();
 		inventory.items.push({'product': product, 'qty': qty, 'supplier': supplier, 'sku': sku, 'price': price, 'lastOrdered': lastOrdered });
 
 		inventory.save(function(err) {
