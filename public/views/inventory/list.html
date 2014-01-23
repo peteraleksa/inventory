@@ -41,7 +41,7 @@
             -->
             </div>
             <div class="well span8 offset2">
-                <form>
+                <form name="inventoryForm">
                     <div>
                         <ul class="inventory unstyled">
                             <li class="border-row" data-ng-repeat="item in inventory.items | filter:{product:query} | orderBy:listSort">
@@ -62,20 +62,25 @@
                         </ul>
                     </div>
                     <div>
-                        <button 
+                        <div ng-show="updating">
+                            <button 
                                 ng-show="updating"
                                 type="button" 
                                 class="btn btn-primary"
-                                ng-click="update()">
+                                ng-click="update(inventoryForm)">
                                 Submit
-                        </button>
-                        <button 
-                                ng-show="!updating"
-                                type="button" 
-                                class="btn btn-success"
-                                ng-click="enter()">
-                                Update
-                        </button>
+                            </button>
+                            Submitted by: <input type="text" name="submitterName" required />
+                            <span ng-show="needName">You need to enter a name.</span>
+                        </div>
+                        <div ng-show="!updating">
+                            <button 
+                                    type="button" 
+                                    class="btn btn-success"
+                                    ng-click="enter()">
+                                    Update
+                            </button>
+                        </div>
                     </div>
                     <div 
                         ng-show="updatecomplete">

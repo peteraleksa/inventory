@@ -6,6 +6,7 @@ angular.module('inventoryApp.inventory').controller('InventoryController', ['$sc
     $scope.updating = false;
     $scope.updatecomplete = false;
     $scope.selectedStore = 'all';
+    $scope.needName = false;
     
     $scope.create = function() {
         var inventory = new Inventory(
@@ -33,18 +34,23 @@ angular.module('inventoryApp.inventory').controller('InventoryController', ['$sc
         }
     };
 
-    $scope.update = function() {
-        var inventory = $scope.inventory;
-        if (!inventory.updated) {
-            inventory.updated = [];
-        }
-        //inventory.updated.push(new Date().getTime());
+    $scope.update = function(form) {
 
-        inventory.$update(function() {
-            $scope.updating = false;
-            $scope.updatecomplete = true;
-            $location.path('inventory/stores/' + inventory._id);
-        });
+        if(form.$valid) {
+            var inventory = $scope.inventory;
+            if (!inventory.updated) {
+                inventory.updated = [];
+            }
+            //inventory.updated.push(new Date().getTime());
+
+            inventory.$update(function() {
+                $scope.updating = false;
+                $scope.updatecomplete = true;
+                $location.path('inventory/stores/' + inventory._id);
+            });
+        } else {
+            $scope.needName = true;
+        }
     };
 
     $scope.enter = function() {
