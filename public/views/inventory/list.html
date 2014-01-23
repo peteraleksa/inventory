@@ -40,13 +40,41 @@
             -->
             </div>
             <div class="well span8 offset2">
-                <form action="/updateInventory" method="post">
+                <form>
                     <ul class="inventory unstyled">
                         <li data-ng-repeat="item in inventory.items | filter:{product:query} | orderBy:listSort">
-                            {{item.product}}<input type="text" name="qty" ng-model="item.qty" width="50px" />
+                            {{item.product}}
+                            <input 
+                                ng-show="updating"
+                                type="text" 
+                                name="qty" 
+                                ng-model="item.qty" 
+                                width="50px" />
+                            <span
+                                ng-show="!updating" >
+                                {{item.qty}}    
+                            </span>
                             {{inventory.lastOrdered}}
                         </li>
                     </ul>
+                    <div 
+                        ng-show="updatecomplete">
+                        Inventory count entered, thanks comrade!
+                    </div>
+                    <button 
+                            ng-show="updating"
+                            type="button" 
+                            class="btn btn-primary"
+                            ng-click="update()">
+                            Submit
+                    </button>
+                    <button 
+                            ng-show="!updating"
+                            type="button" 
+                            class="btn btn-success"
+                            ng-click="enter()">
+                            Update
+                    </button>
                 </form>
 
                 <h1 data-ng-show="!inventory || inventory.length < 1">No inventory yet. <br> Why don't you add an item?</h1>

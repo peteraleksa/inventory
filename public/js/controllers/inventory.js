@@ -3,6 +3,8 @@ angular.module('inventoryApp.inventory').controller('InventoryController', ['$sc
     // search query
     $scope.query = '';  
     $scope.listSort = 'product';
+    $scope.updating = false;
+    $scope.updatecomplete = false;
     
     $scope.create = function() {
         var inventory = new Inventory(
@@ -35,12 +37,19 @@ angular.module('inventoryApp.inventory').controller('InventoryController', ['$sc
         if (!inventory.updated) {
             inventory.updated = [];
         }
-        inventory.updated.push(new Date().getTime());
+        //inventory.updated.push(new Date().getTime());
 
         inventory.$update(function() {
+            $scope.updating = false;
+            $scope.updatecomplete = true;
             $location.path('inventory/' + inventory._id);
         });
     };
+
+    $scope.enter = function() {
+        $scope.updatecomplete = false;
+        $scope.updating = true;
+    }
 
     $scope.find = function() {
         Inventory.query(function(inventory) {
