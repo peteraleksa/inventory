@@ -13,7 +13,7 @@ var should = require('should'),
 
 //Globals
 var user;
-var Inventory;
+var inventory;
 
 //The tests
 describe('<Unit Test>', function() {
@@ -27,27 +27,27 @@ describe('<Unit Test>', function() {
             });
 
             user.save(function(err) {
-                Inventory = new Inventory({
+                inventory = new Inventory({
                     store: 'Norberts Test Store',
-                    updated: Date.now,
+                    updated: new Date(),
                     items: [
                     	{
                     		product: 'Pepperoni',
                     		qty: '7',
-                    		lastChecked: Date.now,
-							   supplier: 'Meats and stuff',
+                    		lastChecked: new Date(),
+							supplier: 'Meats and stuff',
 	   						SKU: 5768575,
 	   						price: 5.00,
-	   						lastOrdered: Date.now
+	   						lastOrdered: new Date()
                     	},
                     	{
 	                    	product: 'Fresh Mozarella',
                     		qty: '3',
-                    		lastChecked: Date.now,
-							   supplier: 'The Cheese Wiz',
+                    		lastChecked: new Date(),
+							supplier: 'The Cheese Wiz',
 	   						SKU: 576777,
 	   						price: 3.00,
-	   						lastOrdered: Date.now
+	   						lastOrdered: new Date()
                     	}
                     ]
                 });
@@ -58,7 +58,7 @@ describe('<Unit Test>', function() {
 
         describe('Method Save', function() {
             it('should be able to save without problems', function(done) {
-                return Inventory.save(function(err) {
+                return inventory.save(function(err) {
                     should.not.exist(err);
                     done();
                 });

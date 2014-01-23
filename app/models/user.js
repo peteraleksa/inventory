@@ -24,11 +24,7 @@ var UserSchema = new Schema({
     facebook: {},
     twitter: {},
     github: {},
-    google: {},
-    favorites: [{
-        type: Schema.ObjectId,
-        ref: 'Symphony'
-    }]
+    google: {}
 });
 
 /**
