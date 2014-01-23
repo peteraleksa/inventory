@@ -67,8 +67,8 @@ module.exports = function(app, passport, auth) {
     app.get('/inventory', inventories.all);
     // authenticated users only can create
     //app.post('/inventory', auth.requiresLogin, inventory.create);
-    app.post('/addItem', inventories.addItem);
-    app.post('/addStore', inventories.create);
+    app.post('/addItem', auth.requiresLogin, inventories.addItem);
+    app.post('/addStore', auth.requiresLogin, inventories.create);
     app.get('/inventory/:inventoryId', inventories.show);
     //app.put('/inventory/:inventoryId', inventory.update);
     //app.del('/inventory/:inventoryId', auth.requiresLogin, auth.inventory.hasAuthorization, inventory.destroy);*/
