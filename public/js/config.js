@@ -48,7 +48,7 @@ window.app.config(['$routeProvider',
             templateUrl: 'views/inventory/locations.html',
             controller: 'InventoryController'
           }).
-          when('/inventory/:inventoryId', {
+          when('/inventory/stores/:storeId', {
             templateUrl: 'views/inventory/list.html',
             controller: 'InventoryController'
           }).

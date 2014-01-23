@@ -1,7 +1,7 @@
 //service used for inventory REST endpoint
 angular.module('inventoryApp.inventory').factory("Inventory", ['$resource', function($resource) {
-    var service = $resource('inventory/:inventoryId', {
-            inventoryId: '@_id'
+    var service = $resource('inventory/stores/:storeId', {
+            storeId: '@_id'
         }, {
             update: {
                 method: 'PUT'

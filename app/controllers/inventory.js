@@ -66,17 +66,21 @@ exports.addItem = function(req, res) {
 		var supplier = req.body.supplier;
 		var sku = req.body.sku;
 		var price = req.body.price;
+		var reorderLimit = req.body.reorderLimit;
 		var lastOrdered = req.body.lastOrdered;
 
-		console.log(product);
-		console.log(qty);
-		console.log(supplier);
-		console.log(sku);
-		console.log(price);
-		console.log(lastOrdered);
-
 		inventory.updated = new Date();
-		inventory.items.push({'product': product, 'qty': qty, 'supplier': supplier, 'sku': sku, 'price': price, 'lastOrdered': lastOrdered });
+		inventory.items.push(
+			{
+				'product': product, 
+				'qty': qty, 
+				'supplier': supplier, 
+				'sku': sku, 
+				'price': price, 
+				'reorderLimit': reorderLimit, 
+				'lastOrdered': lastOrdered 
+			}
+		);
 
 		inventory.save(function(err) {
 			console.log(inventory);

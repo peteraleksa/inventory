@@ -64,18 +64,18 @@ module.exports = function(app, passport, auth) {
 
     //Inventory Routes
     
-    app.get('/inventory', inventories.all);
+    app.get('/inventory/stores', inventories.all);
     // authenticated users only can create
     app.post('/addItem', auth.requiresLogin, inventories.addItem);
     app.post('/addStore', auth.requiresLogin, inventories.create);
-    app.put('/inventory/:inventoryId', inventories.update);
-    app.get('/inventory/:inventoryId', inventories.show);
-    //app.put('/inventory/:inventoryId', inventory.update);
-    //app.del('/inventory/:inventoryId', auth.requiresLogin, auth.inventory.hasAuthorization, inventory.destroy);*/
+    app.put('/inventory/stores/:storeId', inventories.update);
+    app.get('/inventory/stores/:storeId', inventories.show);
+    //app.put('/inventory/:storeId', inventory.update);
+    //app.del('/inventory/:storeId', auth.requiresLogin, auth.inventory.hasAuthorization, inventory.destroy);*/
     //app.put('users/:userId', users.update);
 
-    //Finish with setting up the inventoryId param
-    app.param('inventoryId', inventories.inventory);
+    //Finish with setting up the storeId param
+    app.param('storeId', inventories.inventory);
 
     //Home route
     var index = require('../app/controllers/index');

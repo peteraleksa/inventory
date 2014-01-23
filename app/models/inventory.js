@@ -35,6 +35,9 @@ var mongoose = require('mongoose'),
 	   price: {
 	      type: Number
 	   },
+	   reorderLimit: {
+	   	type: Number
+	   },
 	   lastOrdered: {
 	      type: Date
   	   }	

@@ -48,3 +48,26 @@ form h1 {
     margin-top: 10px;
     color: black;
 }
+.center {
+    margin: 0 auto;
+}
+
+.pad-right {
+    margin-right: 10px;
+    padding-right: 10px;
+}
+
+.pad-left {
+    margin-left: 5px;
+    padding-left: 5px;
+}
+
+.border-row {
+    border-left: 0.75px;
+    border-right: 0.75px;
+    border-top: 0.25px;
+    border-bottom: 0.25px;
+    border-style: dotted;
+    padding: 5px;
+    min-height: 30px;
+}
