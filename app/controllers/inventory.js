@@ -39,6 +39,7 @@ exports.update = function(req, res) {
      var inventory = req.inventory;
      inventory = _.extend(inventory, req.body);
      inventory.save(function(err) {
+     	inventory.checkReorder();
 		res.jsonp(inventory);
      });
 };
@@ -65,39 +66,80 @@ exports.addItem = function(req, res) {
 	var selectedStore = req.body.selectedStore;
 	console.log(selectedStore);
 
-	var stores = [];
 	var inventory;
+	var stores = [];
 
+	// if inserting item into all stores
 	if(selectedStore == "all") {
-		stores.push("Norberts I");
-		stores.push("Norberts II"); 
+		Inventory.find().exec(function(err, inventory) {
+	        if (err) {
+	            res.render('error', {
+	                status: 500
+	            });
+	        } else {
+	        	//console.log(inventory);
+	            for(var i=0; i < inventory.length; i++) {
+	            	var currentinventory = inventory[i];
+	            	console.log(currentinventory);
+					currentinventory.updated = new Date();
+					currentinventory.items.push(
+						{
+							'product': req.body.product, 
+							'qty': req.body.qty, 
+							'supplier': req.body.supplier, 
+							'sku': req.body.sku, 
+							'price': req.body.price, 
+							'reorderLimit': req.body.reorderLimit, 
+							'lastOrdered': req.body.lastOrdered 
+						}
+					);
+
+					currentinventory.save(function(err) {
+
+					});
+	            }
+	            res.json(inventory);
+	        }
+	        //console.log("Stores: " + stores);
+	    });
+		
+	// else if a single store selected
 	} else {
-		stores.push(selectedStore);
+
+		stores.push(Inventory.loadByStoreName(selectedStore, function(err, inventory) {
+			if (err) {
+	            res.render('error', {
+	                status: 500
+	            });
+	        } else {
+	        	console.log(inventory);
+	        	var currentinventory = inventory;
+				currentinventory.updated = new Date();
+				currentinventory.items.push(
+					{
+						'product': req.body.product, 
+						'qty': req.body.qty, 
+						'supplier': req.body.supplier, 
+						'sku': req.body.sku, 
+						'price': req.body.price, 
+						'reorderLimit': req.body.reorderLimit, 
+						'lastOrdered': req.body.lastOrdered 
+					}
+				);
+
+				currentinventory.save(function(err) {
+					//res.json(currentinventory);
+				});
+
+				res.jsonp(inventory);
+	        }
+		}));
 	}
-
-	for(var i=0; i < stores.length; i++) {
-		console.log(stores[i]);
-		inventory = Inventory.loadByStoreName(stores[i], function(err, inventory) {
-			inventory.updated = new Date();
-			inventory.items.push(
-				{
-					'product': req.body.product, 
-					'qty': req.body.qty, 
-					'supplier': req.body.supplier, 
-					'sku': req.body.sku, 
-					'price': req.body.price, 
-					'reorderLimit': req.body.reorderLimit, 
-					'lastOrdered': req.body.lastOrdered 
-				}
-			);
-
-			inventory.save(function(err) {
-				//res.json(inventory);
-			});
-		});
-	}
-
-	next();
 };
 
+/*
+exports.checkReorder = function() {
+
+};
+*/
 
