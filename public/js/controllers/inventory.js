@@ -5,6 +5,7 @@ angular.module('inventoryApp.inventory').controller('InventoryController', ['$sc
     $scope.listSort = 'product';
     $scope.updating = false;
     $scope.updatecomplete = false;
+    $scope.selectedStore = 'all';
     
     $scope.create = function() {
         var inventory = new Inventory(

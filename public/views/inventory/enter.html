@@ -1,7 +1,12 @@
 <section>
-<div data-ng-controller="InventoryController">    
+<div data-ng-controller="InventoryController"
+     data-ng-init="find()">    
         <div class="well span8 offset2">
         	<form action="/addItem" method="post">
+                 Store: <select ng-model="selectedStore" name="selectedStore">
+                          <option value="all">All</option>
+                          <option data-ng-repeat="storeinventory in inventory" value="{{storeinventory.store}}">{{storeinventory.store}}</option>
+                        </select><br/>
         	       Product:<input type="text" name="product"/><br/>
         	       Initial Quantity:<input type="text" name="qty"/><br/> 
                        Supplier:<input type="text" name="supplier"/><br/>
