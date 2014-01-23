@@ -65,6 +65,24 @@ describe('<Unit Test>', function() {
             });
         });
 
+        describe('Method Load', function() {
+            it('should be able to load without problems', function(done) {
+                return Inventory.load(inventory._id, function(err) {
+                    should.not.exist(err);
+                    done();
+                });
+            });
+        });
+
+        describe('Method Load By Store Name', function() {
+            it('should be able to load by store name without problems', function(done) {
+                return Inventory.loadByStoreName(inventory.store, function(err) {
+                    should.not.exist(err);
+                    done();
+                });
+            });
+        });
+
 /* 
  * hmmm, is this even necessary??
  *
