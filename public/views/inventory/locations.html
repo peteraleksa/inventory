@@ -24,7 +24,7 @@
 				    <li data-ng-repeat=
 				            "storeinventory in inventory | filter:{store:query}"
 				        id="{{inventory._id}}">
-				        <h2><a href="/inventory/{{storeinventory._id}}">{{storeinventory.store}}</a></h2>
+				        <h2><a data-ng-href="#!/inventory/{{storeinventory._id}}">{{storeinventory.store}}</a></h2>
 				        <span>Last Updated: {{storeinventory.updated | date:'medium'}}</span>
 				    </li>
 				</ul>

@@ -2,6 +2,7 @@ angular.module('inventoryApp.inventory').controller('InventoryController', ['$sc
     $scope.global = Global;
     // search query
     $scope.query = '';  
+    $scope.listSort = 'product';
     
     $scope.create = function() {
         var inventory = new Inventory(

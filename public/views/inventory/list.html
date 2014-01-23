@@ -21,26 +21,33 @@
                 <button type="button" 
                         class="btn btn-primary" 
                         ng-model="listSort"
-                        btn-radio="'-product'">
+                        btn-radio="'product'">
                         Product
                 </button>
                 <button type="button" 
                         class="btn btn-primary" 
                         ng-model="listSort"
-                        btn-radio="'-qty'">
+                        btn-radio="'qty'">
                         Quantity
                 </button>
+            <!--
                 <button type="button" 
                         class="btn btn-primary" 
                         ng-model="listSort" 
-                        btn-radio="'-lastChecked'">
+                        btn-radio="'-lastOrdered'">
                         Last Checked
                 </button>
+            -->
             </div>
             <div class="well span8 offset2">
-                <ul class="inventory unstyled">
-                    <li data-ng-repeat="item in inventory.items">{{item.product}}</li>
-                </ul>
+                <form action="/updateInventory" method="post">
+                    <ul class="inventory unstyled">
+                        <li data-ng-repeat="item in inventory.items | filter:{product:query} | orderBy:listSort">
+                            {{item.product}}<input type="text" name="qty" ng-model="item.qty" width="50px" />
+                            {{inventory.lastOrdered}}
+                        </li>
+                    </ul>
+                </form>
 
                 <h1 data-ng-show="!inventory || inventory.length < 1">No inventory yet. <br> Why don't you add an item?</h1>
             </div>

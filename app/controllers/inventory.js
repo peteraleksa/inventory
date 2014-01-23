@@ -43,6 +43,10 @@ exports.update = function(req, res) {
      });
 };
 
+exports.show = function(req, res) {
+    res.jsonp(req.inventory);
+};
+
 exports.all = function(req, res) {
     Inventory.find().exec(function(err, inventory) {
         if (err) {
@@ -53,10 +57,6 @@ exports.all = function(req, res) {
             res.jsonp(inventory);
         }
     });
-};
-
-exports.show = function(req, res) {
-    res.jsonp(req.inventory);
 };
 
 exports.addItem = function(req, res) {
