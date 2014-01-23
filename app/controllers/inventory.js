@@ -35,11 +35,24 @@ exports.create = function(req, res, next) {
     
 };
 
+var checkReorder = function(checkinventory) {
+	console.log(checkinventory);
+	for(var i=0; i < checkinventory.items.length; i++) {
+		if(!(checkinventory.items[i].qty > 
+			checkinventory.items[i].reorderLimit)) {
+				console.log("Reorder " + checkinventory.items[i].product);
+		}
+		else {
+			console.log("No need to reorder " + checkinventory.items[i].product);
+		}
+	}
+};
+
 exports.update = function(req, res) {
      var inventory = req.inventory;
      inventory = _.extend(inventory, req.body);
      inventory.save(function(err) {
-     	inventory.checkReorder();
+     	checkReorder(inventory);
 		res.jsonp(inventory);
      });
 };
@@ -137,9 +150,4 @@ exports.addItem = function(req, res) {
 	}
 };
 
-/*
-exports.checkReorder = function() {
-
-};
-*/
 
