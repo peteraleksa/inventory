@@ -13,6 +13,15 @@ angular.module('inventoryApp.inventory').factory("Inventory", ['$resource', func
 
 }]);
 
+angular.module('inventoryApp.inventory').factory("Order", ['$resource', function($resource) {
+    var service = $resource('inventory/order', 
+        { 'get':    {method:'JSONP', isArray:true},
+          'query':  {method:'JSONP', isArray:true }
+        }
+    );
+    return service;
+}]);
+
 /*
 angular.module('inventoryApp.inventory').factory("Users", ['$resource', function($resource) {
     return {

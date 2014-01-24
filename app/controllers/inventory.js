@@ -3,6 +3,7 @@
  */
 var mongoose = require('mongoose'),
     Inventory = mongoose.model('Inventory'),
+    Order = mongoose.model('Order'),
     _ = require('underscore');
 
 /**
@@ -40,11 +41,11 @@ var checkReorder = function(item) {
 	if(!(item.qty > 
 		item.reorderLimit)) {
 			console.log("Reorder " + item.product);
-			item.reorder = new Boolean(true);
+			item.needsReorder = true;
 	}
 	else {
 		console.log("No need to reorder " + item.product);
-		item.reorder = new Boolean(false);
+		item.needsReorder = false;
 	}
 };
 
@@ -52,14 +53,27 @@ exports.update = function(req, res) {
      var inventory = req.inventory;
      inventory = _.extend(inventory, req.body);
 
+     // Create new order tally
+     var order = new Order();
+     order.store = inventory.store;
+     order.date = new Date();
+     order.needsAttention = true;
+     order.items = [];
+
      // check reorder status of each item
      for(var i=0; i < inventory.items.length; i++) {
      	checkReorder(inventory.items[i]);
+     	if(inventory.items[i].needsReorder) {
+     		order.items.push(inventory.items[i]);
+     	}
      }	
 
      // save inventory
      inventory.save(function(err) {
-		res.jsonp(inventory);
+		// save order
+     	order.save(function(err) {
+     		res.jsonp(order);
+     	});
      });
 };
 

@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <header class="span8 offset2" 
-                    data-ng-show="inventory || inventory.length > 0">
+                    data-ng-show="reorders || reorders > 0">
                     <h1>Inventory:</h1>
             </header>
         </div>
@@ -46,20 +46,21 @@
                 <form name="orderForm">
                     <div>
                         <ul class="inventory unstyled">
-                            <li class="border-row" data-ng-repeat="item in reorders | filter:{product:query} | orderBy:listSort">
+                            <li class="border-row" data-ng-repeat="reorder in reorders | filter:{product:query} | orderBy:listSort">{{reorder.store}}
+
+                            <ul class="" data-ng-repeat="item in reorder.items"
                                 <span class="pad-left">{{item.product}}</span>
                                 <input 
                                     class="input-mini pull-right pad-right text-right"
                                     ng-show="updating"
                                     type="text" 
                                     name="qty" 
-                                    ng-model="item.qty" />
+                                    ng-model="reorder.qty" />
                                 <span
                                     class="pull-right pad-right"
                                     ng-show="!updating" >
                                     {{item.qty}}    
                                 </span>
-                                {{inventory.lastOrdered}}
                             </li>
                         </ul>
                     </div>

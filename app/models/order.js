@@ -12,6 +12,12 @@ var mongoose = require('mongoose'),
  	store: {
  		type: String
  	},
+ 	date: {
+ 		type: Date
+ 	},
+ 	needsAttention: {
+ 		type: Boolean
+ 	},
  	items: [{
 	   product: {
 	      type: String

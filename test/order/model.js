@@ -25,6 +25,8 @@ describe('<Unit Test>', function() {
 			user.save(function(err) {
 				order = new Order({
 					store: 'Norberts Test Store',
+					date: new Date(),
+ 					needsAttention: true,
 					items: [
                     	{
                     		product: 'Pepperoni',

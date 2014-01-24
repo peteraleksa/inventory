@@ -1,4 +1,4 @@
-angular.module('inventoryApp.inventory').controller('InventoryController', ['$scope', '$filter', '$routeParams', '$location', 'Global', 'Inventory', function ($scope, $filter, $routeParams, $location, Global, Inventory) {
+angular.module('inventoryApp.inventory').controller('InventoryController', ['$scope', '$filter', '$routeParams', '$location', 'Global', 'Order', 'Inventory', function ($scope, $filter, $routeParams, $location, Global, Order, Inventory) {
     $scope.global = Global;
     // search query
     $scope.query = '';  
@@ -7,6 +7,7 @@ angular.module('inventoryApp.inventory').controller('InventoryController', ['$sc
     $scope.updatecomplete = false;
     $scope.selectedStore = 'all';
     $scope.needName = false;
+    $scope.reorders;
     
     $scope.create = function() {
         var inventory = new Inventory(
@@ -46,7 +47,7 @@ angular.module('inventoryApp.inventory').controller('InventoryController', ['$sc
             inventory.$update(function() {
                 $scope.updating = false;
                 $scope.updatecomplete = true;
-                $location.path('inventory/stores/' + inventory._id);
+                $location.path('inventory/order');
             });
         } else {
             $scope.needName = true;
@@ -84,11 +85,10 @@ angular.module('inventoryApp.inventory').controller('InventoryController', ['$sc
     };
 
     $scope.getReorders = function() {
-        Inventory.get({
-            storeId: $routeParams.storeId
-        }, function(inventory) {
-            $scope.inventory = inventory;
-            console.log(inventory);
+        Order.query(function(orders) {
+            $scope.reorders = orders;
+            console.log(orders);
+            console.log($scope.reorders);
         });
     };
 
