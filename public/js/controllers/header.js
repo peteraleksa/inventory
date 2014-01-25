@@ -6,15 +6,15 @@ angular.module('inventoryApp.system').controller('HeaderController', ['$scope', 
         "link": "inventory/locations"
     }, 
     {
+        "title": "Orders",
+        "link": "inventory/order"
+    },
+    {
     	"title": "About",
     	"link": "about"
     }];
 
     $scope.authmenu = [
-        {
-            "title": "Orders",
-            "link": "inventory/order"
-        },
         {
             "title": "Add/Delete Item",
             "link": "inventory/enter"

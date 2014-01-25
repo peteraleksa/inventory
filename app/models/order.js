@@ -58,6 +58,11 @@ OrderSchema.statics = {
         this.findOne({
             _id: id
         }).exec(cb);
+    },
+    loadByStoreName: function(name, cb) {
+    	this.findOne({
+    		store: name
+    	}).exec(cb);
     }
 };
 

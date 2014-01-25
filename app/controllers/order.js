@@ -7,13 +7,13 @@ var mongoose = require('mongoose'),
 
 exports.orders = function(req, res) {
 
-	Order.find().exec(function(err, orders) {
+	Order.find({needsAttention: true}).exec(function(err, orders) {
         if (err) {
             res.render('error', {
                 status: 500
             });
         } else {
-        	console.log('Order: ' + orders);
+        	//console.log('Order: ' + orders);
             res.jsonp(orders);
         }
     });

@@ -60,6 +60,9 @@ window.app.config(['$routeProvider',
             templateUrl: 'views/inventory/store.html',
             controller: 'InventoryController'
           }).
+          when('/addItem', {
+             redirectTo: '/views/inventory/enter.html'
+          }).
           when('/about', {
             templateUrl: 'views/about.html'
           }).

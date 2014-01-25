@@ -13,8 +13,7 @@ var mongoose = require('mongoose'),
  		type: String
  	},
 	updated: {
-	   type: Date,
-	   default: Date.now
+	   type: Date
 	},
 	items: [{
 	   product: {

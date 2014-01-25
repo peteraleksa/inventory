@@ -37,7 +37,7 @@ exports.create = function(req, res, next) {
 };
 
 var checkReorder = function(item) {
-	console.log(item);
+	//console.log(item);
 	if(!(item.qty > 
 		item.reorderLimit)) {
 			console.log("Reorder " + item.product);
@@ -52,6 +52,9 @@ var checkReorder = function(item) {
 exports.update = function(req, res) {
      var inventory = req.inventory;
      inventory = _.extend(inventory, req.body);
+     
+     var orderPending = false;
+     var oldOrder;
 
      // Create new order tally
      var order = new Order();
@@ -60,7 +63,22 @@ exports.update = function(req, res) {
      order.needsAttention = true;
      order.items = [];
 
-     // check reorder status of each item
+     // check to see if store has an order pending already
+     Order.find({store: order.store, needsAttention: true}).exec(function(err, storeorders) {
+        if (!storeorders) {
+        	orderPending = false;
+        } else {
+        	for(var i=0; i < storeorders.length; i++) {
+	        	 storeorders[i].needsAttention = false;
+	        	 storeorders[i].save(function(err) {
+	        	 	console.log("Store Order: " + storeorders[i]);
+				 });
+			}
+	        orderPending = true;
+        }
+     });
+
+     // check reorder status of each item and push it on the list
      for(var i=0; i < inventory.items.length; i++) {
      	checkReorder(inventory.items[i]);
      	if(inventory.items[i].needsReorder) {
@@ -71,9 +89,8 @@ exports.update = function(req, res) {
      // save inventory
      inventory.save(function(err) {
 		// save order
-     	order.save(function(err) {
-     		res.jsonp(order);
-     	});
+     	order.save();
+     	res.jsonp(inventory);
      });
 };
 
@@ -131,8 +148,7 @@ exports.addItem = function(req, res) {
 	            	inventory[i].save(function(err) {
 	            	});
 	            }
-	            
-	            res.json(inventory);
+	            res.redirect('/#!/inventory/enter');
 	        }
 	    });
 		
@@ -146,7 +162,7 @@ exports.addItem = function(req, res) {
 	        } else {
 	        	addToInventory(inventory);
 				inventory.save(function(err) {
-					res.jsonp(inventory);
+					res.redirect('/#!/inventory/enter');
 				});
 	        }
 		});

@@ -3,16 +3,18 @@ angular.module('inventoryApp.inventory').controller('InventoryController', ['$sc
     // search query
     $scope.query = '';  
     $scope.listSort = 'product';
+    $scope.locationSort = 'store';
     $scope.updating = false;
     $scope.updatecomplete = false;
     $scope.selectedStore = 'all';
     $scope.needName = false;
     $scope.reorders;
+    $scope.storename;
     
     $scope.create = function() {
         var inventory = new Inventory(
             {
-                store: $scope.store,
+                store: $scope.storename,
                 updated: Date.now,
                 items: []
             }
@@ -20,7 +22,7 @@ angular.module('inventoryApp.inventory').controller('InventoryController', ['$sc
 
         inventory.$save(function(response) {
             console.log(response);
-            $location.path("inventory/stores/" + response._id);
+            $location.path("inventory/locations");
         });
 
     };
@@ -42,12 +44,12 @@ angular.module('inventoryApp.inventory').controller('InventoryController', ['$sc
             if (!inventory.updated) {
                 inventory.updated = [];
             }
-            //inventory.updated.push(new Date().getTime());
+            inventory.updated = new Date();
 
             inventory.$update(function() {
                 $scope.updating = false;
                 $scope.updatecomplete = true;
-                $location.path('inventory/order');
+                $location.path('inventory/stores/' + inventory._id);
             });
         } else {
             $scope.needName = true;

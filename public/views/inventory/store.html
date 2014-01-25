@@ -1,10 +1,19 @@
 <section>
 <div data-ng-controller="InventoryController">    
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<header class="span8 offset2">
+				<h1>Add New Store:</h1>
+			</header>
+		</div>
         <div class="well span8 offset2">
-        	<form action="/addStore" method="post">
-        	       Store Name:<input type="text" name="store"/><br/>
-        	       <input type="submit" class="btn btn-success" />
+        	<form>
+        		<div>
+        	       Store Name:<input type="text" name="store" ng-model="storename"/>
+        	    	<input type="button" class="btn btn-primary" value="Add Store" ng-click="create()"/>
+        	    </div>
         	</form>
         </div>
+    </div>
 </div>
 </section>

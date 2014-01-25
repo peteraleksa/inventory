@@ -4,8 +4,8 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <header class="span8 offset2" 
-                    data-ng-show="inventory || inventory.length > 0">
-                    <h1>Inventory:</h1>
+                    data-ng-hide="!inventory || inventory.length < 1">
+                    <h1><span class="highlight">{{inventory.store}}</span> Inventory:</h1>
             </header>
         </div>
         <div class="row-fluid">
@@ -62,7 +62,7 @@
                         </ul>
                     </div>
                     <div>
-                        <div ng-show="updating">
+                        <div ng-hide="!updating || !inventory || inventory.length < 1">
                             <button 
                                 ng-show="updating"
                                 type="button" 
@@ -70,10 +70,12 @@
                                 ng-click="update(inventoryForm)">
                                 Submit
                             </button>
-                            Submitted by: <input type="text" name="submitterName" required />
-                            <span ng-show="needName">You need to enter a name.</span>
+                            <div class="pull-right pad-right">
+                                Submitted by: <input type="text" name="submitterName" required />
+                                <span ng-show="needName">You need to enter a name.</span>
+                            </div>
                         </div>
-                        <div ng-show="!updating">
+                        <div ng-hide="updating || !inventory || inventory.length < 1">
                             <button 
                                     type="button" 
                                     class="btn btn-success"
@@ -81,14 +83,16 @@
                                     Update
                             </button>
                         </div>
+                         <span
+                            ng-show="updatecomplete"
+                            class="text-center">
+                            Inventory count entered, thanks comrade!
+                        </span>
                     </div>
-                    <div 
-                        ng-show="updatecomplete">
-                        Inventory count entered, thanks comrade!
-                    </div>
+
                 </form>
 
-                <h1 data-ng-show="!inventory || inventory.length < 1">No inventory yet. <br> Why don't you add an item?</h1>
+                <h1 data-ng-hide="inventory || inventory.length > 0">Inventory Loading...</h1>
             </div>
         </div>
     </div>
